@@ -32,18 +32,33 @@
 			firstGame = false;
 		}
 
-		//Select word at random from wordBank
+	//Select word at random from wordBank
 		var newWord = false;
-		while (newWord === false) {
-			wordIndex = Math.floor(Math.random() * wordBank.length)
-			if(wordUsed[wordIndex] === "unused") {
-				wordActive = wordBank[wordIndex];
-				wordUsed[wordIndex] = "used";
-				newWord = true;
+		//If all words have already been used then skip while loop to avoid infinite loop
+		if (wordUsed.includes("unused")) {
+			while (newWord === false) {
+				wordIndex = Math.floor(Math.random() * wordBank.length)
+				if(wordUsed[wordIndex] === "unused") {
+					wordActive = wordBank[wordIndex];
+					wordUsed[wordIndex] = "used";
+					newWord = true;
+				}
 			}
-			
 		}
+
+	//Create array with enough "_" characters for entire word
+		//Array for displaying word on screen, is modified while user guesses
+		var wordDisplay = [];
+		var wordHTML = "";
+		//Generate "_" with correct length
+		for (i=0; i < wordActive.length; i++) {
+			wordDisplay.push(" _");
+		}
+		wordHTML = "<h3>" + wordDisplay.join("") + "</h3>";
+		document.getElementsByClassName("current-word")[0].innerHTML = wordHTML;
+
 	console.log(losses);
 	console.log(wordActive);
+	console.log(wordDisplay);
 	}
 
