@@ -77,7 +77,7 @@
 			guessesLeft--;
 			//If no guesses left, then lose
 			if (guessesLeft === 0) {
-
+				startButton();
 			}
 			else {
 				//Check for correct guess and update display array
