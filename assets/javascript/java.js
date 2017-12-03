@@ -24,6 +24,8 @@
 	var losses = 0;
 	var guessesLeft;
 
+	var guessesAllowed = 10;//How many guesses before loss
+
 	//loop variable for checking if a word has already been used
 	var wordIndex = -1;
 
@@ -32,9 +34,8 @@
 		//Declare variables
 		wordDisplay = []; //Clear the array
 		usedLetters = []; //Clear the array
-		var wordHTML = "";
-		var newWord = false;
-		guessesLeft = 20;
+		var newWord = false; //condition to exit loop
+		guessesLeft = guessesAllowed;
 
 
 		//If not the first game, increment the losses counter
@@ -63,7 +64,7 @@
 		for (i=0; i < wordActive.length; i++) {
 			wordDisplay.push(" _");
 		}
-		document.getElementsByClassName("current-word")[0].innerHTML = "<h3>" + wordDisplay.join("") + "</h3>";
+		updateDisplay();
 	}
 
 //Trigger for when user inputs a letter
@@ -72,12 +73,17 @@
 		var correctGuess = false; //The guess is assumed incorrect until a correct guess is verified
 
 		//Check if letter has already been guessed
-		if (usedLetters.indexOf(letterGuessed) === -1) {
-			usedLetters.push(letterGuessed); //Add letter to list of used letters
+		if (usedLetters.indexOf(letterGuessed.toUpperCase()) === -1) {
+			usedLetters.push(letterGuessed.toUpperCase()); //Add letter to list of used letters
+			usedLetters.sort();
 			guessesLeft--;
 			//If no guesses left, then lose
 			if (guessesLeft === 0) {
+				alert(`you lost....the word was: ${wordActive}`);
+				usedLetters = [];
+				updateDisplay();
 				startButton();
+				return
 			}
 			else {
 				//Check for correct guess and update display array
@@ -89,20 +95,38 @@
 				}
 				//Check for win condition
 				if (wordDisplay.indexOf(" _") === -1) {
-					wordDisplay[0] = "YOU WON!!!"; //Congratulate the player
-					wordDisplay = wordDisplay.slice(0,1); //Get rid of the rest of the array
+					alert(`YOU WON!!! Word was: ${wordActive}`);
+					usedLetters = [];
 					wins++; //Increment the win tally
-					//Update the win/loss display
 					firstGame = true; //Reset to prevent incrementing loss tally
+					startButton();
 				}
-				document.getElementsByClassName("current-word")[0].innerHTML = "<h3>" + wordDisplay.join("") + "</h3>";
+				updateDisplay();
 			}
-
-		updateRecordDisplay();//Check for win condition
-
 		}
 	}
 
-	function updateRecordDisplay() {
-		document.querySelector("div.record h2").innerHTML = `Wins: ${wins}<br>Losses: ${losses}<br>Guesses left: ${guessesLeft}`
+//Updates the win, loss, and guesses left display
+function updateDisplay() {
+	document.querySelector("div.current-word h3").innerHTML = wordDisplay.join("");
+	document.querySelector("div.record h2").innerHTML = `Wins: ${wins}<br>Losses: ${losses}`
+	document.querySelector("div.guesses-left h4").innerHTML = `Guesses left: ${guessesLeft}`
+	document.querySelector("div.used-characters h4").innerHTML = `Letters used: ${usedLetters}`
+}
+//User can enter a set of their own words to use in the game
+function enterWords() {
+	var wordListInput = prompt("Enter your list of words here seperated by spaces");
+	wordBank = [];
+	var i = 0;
+
+	while (wordListInput.includes(" ") === true && i < 200) {
+		wordBank[i] =  wordListInput.slice(0,wordListInput.indexOf(" "))
+
+		wordListInput = wordListInput.slice(wordListInput.indexOf(" "),wordListInput.length);
+
+		if (wordListInput.charAt(0) === " ") {
+			wordListInput = wordListInput.slice(1,wordListInput.length);
+		}
+		i++;
 	}
+}

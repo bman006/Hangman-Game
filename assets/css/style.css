@@ -17,8 +17,8 @@
 }
 .record button {
 	float: right;
+	height: 50%;
 }
-
 .guesses-left {
 	height: 100px;
 	background-color: green;
@@ -28,5 +28,5 @@
 .used-characters {
 	height: 100px;
 	background-color: purple;
-	color: black;
+	color: white;
 }
