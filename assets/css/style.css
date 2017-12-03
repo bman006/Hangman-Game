@@ -1,29 +1,32 @@
 	header {
-	height: 50px;
+	height: 100px;
 	background-color: blue;
 	color: black;
 }
 
 .current-word {
-	height: 50px;
+	height: 100px;
 	background-color: red;
 	color: black;
 }
 
 .record {
-	height: 50px;
+	height: 100px;
 	background-color: orange;
 	color: black;
 }
+.record button {
+	float: right;
+}
 
 .guesses-left {
-	height: 50px;
+	height: 100px;
 	background-color: green;
 	color: black;
 }
 
 .used-characters {
-	height: 50px;
+	height: 100px;
 	background-color: purple;
 	color: black;
 }
