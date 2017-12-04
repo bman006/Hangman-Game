@@ -69,39 +69,44 @@
 
 //Trigger for when user inputs a letter
 	document.onkeyup = function(event) {
-		var letterGuessed = event.key.toLowerCase(); //store key presses
-		var correctGuess = false; //The guess is assumed incorrect until a correct guess is verified
+		//If he key pressed isn't a letter, then don't run this function
+		var isKeyPressedALetter = 0;
+		isKeyPressedALetter = event.keyCode;
+		if (isKeyPressedALetter > 64 && isKeyPressedALetter < 173) {
+			var letterGuessed = event.key.toLowerCase(); //store key presses
+			var correctGuess = false; //The guess is assumed incorrect until a correct guess is verified
 
-		//Check if letter has already been guessed
-		if (usedLetters.indexOf(letterGuessed.toUpperCase()) === -1) {
-			usedLetters.push(letterGuessed.toUpperCase()); //Add letter to list of used letters
-			usedLetters.sort();
-			guessesLeft--;
-			//If no guesses left, then lose
-			if (guessesLeft === 0) {
-				alert(`you lost....the word was: ${wordActive}`);
-				usedLetters = [];
-				updateDisplay();
-				startButton();
-				return
-			}
-			else {
-				//Check for correct guess and update display array
-				for (i=0; i < wordActive.length; i++) {
-					if (wordActive.charAt(i) === letterGuessed) {
-						wordDisplay[i] = letterGuessed;
-						correctGuess = true;
-					}
-				}
-				//Check for win condition
-				if (wordDisplay.indexOf(" _") === -1) {
-					alert(`YOU WON!!! Word was: ${wordActive}`);
+			//Check if letter has already been guessed
+			if (usedLetters.indexOf(letterGuessed.toUpperCase()) === -1) {
+				usedLetters.push(letterGuessed.toUpperCase()); //Add letter to list of used letters
+				usedLetters.sort();
+				guessesLeft--;
+				//If no guesses left, then lose
+				if (guessesLeft === 0) {
+					alert(`you lost....the word was: ${wordActive}`);
 					usedLetters = [];
-					wins++; //Increment the win tally
-					firstGame = true; //Reset to prevent incrementing loss tally
+					updateDisplay();
 					startButton();
+					return
 				}
-				updateDisplay();
+				else {
+					//Check for correct guess and update display array
+					for (i=0; i < wordActive.length; i++) {
+						if (wordActive.charAt(i) === letterGuessed) {
+							wordDisplay[i] = letterGuessed;
+							correctGuess = true;
+						}
+					}
+					//Check for win condition
+					if (wordDisplay.indexOf(" _") === -1) {
+						alert(`YOU WON!!! Word was: ${wordActive}`);
+						usedLetters = [];
+						wins++; //Increment the win tally
+						firstGame = true; //Reset to prevent incrementing loss tally
+						startButton();
+					}
+					updateDisplay();
+				}
 			}
 		}
 	}
@@ -129,4 +134,4 @@ function enterWords() {
 		}
 		i++;
 	}
-}
+}	
