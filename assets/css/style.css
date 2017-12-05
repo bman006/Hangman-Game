@@ -9,7 +9,11 @@
 	background-color: red;
 	color: black;
 }
-
+.current-word h3 {
+	height: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
 .record {
 	height: 100px;
 	background-color: orange;
@@ -19,21 +23,28 @@
 .record div.buttons {
 	float: right;
 	height: 100%;
-	margin: 5% 0 5% 0;
+	margin: auto 0;
 }
 .buttons button {
 	height: 30%;
 	width: 90px;
+}
+.buttons a {
+	color:black;
 }
 
 .guesses-left {
 	height: 100px;
 	background-color: green;
 	color: black;
+	text-align: center;
+	vertical-align: middle;
 }
 
 .used-characters {
 	height: 100px;
 	background-color: purple;
 	color: white;
+	text-align: center;
+	vertical-align: middle;
 }
