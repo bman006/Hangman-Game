@@ -48,7 +48,10 @@
 
 		//Select word at random from wordBank
 		//If all words have already been used then skip while loop to avoid infinite loop
-		if (wordUsed.includes("unused")) {
+		if (wordUsed.includes("unused") === false) {
+			alert("IIIII HAAAAAVE NOOOOOOOO WOOOOOOOOORDSSSSSSSSSSSSS!!!!!!!!!!");
+		}
+		else {
 			while (newWord === false) {
 				wordIndex = Math.floor(Math.random() * wordBank.length)
 				if(wordUsed[wordIndex] === "unused") {
@@ -57,12 +60,12 @@
 					newWord = true;
 				}
 			}
-		}
-
-		//Create array with enough "_" characters for entire word
-		//Generate "_" with correct length
-		for (i=0; i < wordActive.length; i++) {
-			wordDisplay.push(" _");
+		
+			//Create array with enough "_" characters for entire word
+			//Generate "_" with correct length
+			for (i=0; i < wordActive.length; i++) {
+				wordDisplay.push(" _");
+			}
 		}
 		updateDisplay();
 	}
