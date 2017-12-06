@@ -1,6 +1,6 @@
 //Declare all global variables
 	//Store all possible words for use in the hangman game
-	var wordBank = ["one", "two", "three", "four", "five"];
+	var wordBank = ["donald", "daffy", "mallard", "aflac", "rubber", "bufflehead", "mandarin", "tufted", "garganey", "hardhead"];
 
 	//Check which words have already been used by the game
 	var wordUsed = [];
@@ -29,10 +29,6 @@
 	//loop variable for checking if a word has already been used
 	var wordIndex = -1;
 
-//Trigger for when user inputs a letter
-	document.onkeyup = function(event) {
-
-		}
 //Initiate game or skip to next word
 	function startButton() {
 		//Declare variables
@@ -72,6 +68,7 @@
 			}
 		}
 		updateDisplay();
+		console.log(wordActive);
 	}
 
 //Trigger for when user inputs a letter
@@ -91,11 +88,11 @@
 			var isKeyPressedALetter = 0;
 			isKeyPressedALetter = event.keyCode;
 			if (isKeyPressedALetter > 64 && isKeyPressedALetter < 173) {
-				var letterGuessed = event.key.toLowerCase(); //store key presses
+				var letterGuessed = event.key.toUpperCase(); //store key presses
 				var correctGuess = false; //The guess is assumed incorrect until a correct guess is verified
 
 				//Check if letter has already been guessed
-				if (usedLetters.indexOf(letterGuessed.toUpperCase()) === -1) {
+				if (usedLetters.indexOf(letterGuessed) === -1) {
 					usedLetters.push(letterGuessed.toUpperCase()); //Add letter to list of used letters
 					usedLetters.sort();
 					guessesLeft--;
@@ -110,7 +107,7 @@
 					else {
 						//Check for correct guess and update display array
 						for (i=0; i < wordActive.length; i++) {
-							if (wordActive.charAt(i) === letterGuessed) {
+							if (wordActive.charAt(i).toUpperCase() === letterGuessed) {
 								wordDisplay[i] = letterGuessed;
 								correctGuess = true;
 								updateDisplay();
@@ -138,7 +135,7 @@
 //Updates the win, loss, and guesses left display
 function updateDisplay() {
 	document.querySelector("div.current-word h3").innerHTML = wordDisplay.join("");
-	document.querySelector("div.record h2").innerHTML = `Wins: ${wins}<br>Losses: ${losses}`
+	document.querySelector("div.record h2").innerHTML = `W: ${wins} L: ${losses}`
 	document.querySelector("div.guesses-left h4").innerHTML = `Guesses left: ${guessesLeft}`
 	document.querySelector("div.used-characters h4").innerHTML = `Letters used: ${usedLetters}`
 }
