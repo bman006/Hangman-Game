@@ -1,13 +1,35 @@
-	header {
-	height: 100px;
+body {
+	background-image: url(../images/background.png);
+	background-repeat: repeat-x;
+	background-attachment: fixed;
+	background-position: bottom;
+	background-color: #3cbcfc;
+	font-family: VT323;
+	filter: blur(1px);
+	color: #a0cb44;
+}
+@font-face {
+	font-family: duckHunt;
+	src: url(duckhunt.ttf);
+}
+
+header {
+	padding-left: 5%;
+	height: auto;
+	width: 100%;
+	font-family: duckHunt;
+	font-size: 4em;
 	background-color: blue;
-	color: black;
+	color: white;
 }
 
 .current-word {
-	height: 100px;
-	background-color: red;
-	color: black;
+	height: 50px;
+	font-size: 1.5em;
+	border-radius: 8px;
+	background-color: #000000;
+	border: 2px solid #a0cb44;
+;
 }
 .current-word h3 {
 	height: 100%;
@@ -15,7 +37,7 @@
 	vertical-align: middle;
 }
 .record {
-	height: 100px;
+	height: 50px;
 	background-color: orange;
 	color: black;
 }
@@ -34,7 +56,7 @@
 }
 
 .guesses-left {
-	height: 100px;
+	height: 50px;
 	background-color: green;
 	color: black;
 	text-align: center;
@@ -42,7 +64,7 @@
 }
 
 .used-characters {
-	height: 100px;
+	height: 50px;
 	background-color: purple;
 	color: white;
 	text-align: center;

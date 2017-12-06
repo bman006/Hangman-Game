@@ -29,7 +29,11 @@
 	//loop variable for checking if a word has already been used
 	var wordIndex = -1;
 
-//Initiate game
+//Trigger for when user inputs a letter
+	document.onkeyup = function(event) {
+
+		}
+//Initiate game or skip to next word
 	function startButton() {
 		//Declare variables
 		wordDisplay = []; //Clear the array
@@ -71,10 +75,19 @@
 	}
 
 //Trigger for when user inputs a letter
-	document.onkeyup = function(event) {
-		//Don't run this function until the start button is clicked at least once
-		if (firstGame === false) {
-			//If he key pressed isn't a letter, then don't run this function
+	document.onkeyup = function(event) {	
+		//This code is only to initiate the game
+		if (firstGame) {
+			//If the key pressed isn't a letter, then don't run this function
+			var isKeyPressedALetter = 0;
+			isKeyPressedALetter = event.keyCode;
+			if (isKeyPressedALetter > 64 && isKeyPressedALetter < 173) {
+				startButton();					
+				}
+			}
+		//This code shouldn't run until the game has been initiated
+		else {
+			//If the key pressed isn't a letter, then don't run this function
 			var isKeyPressedALetter = 0;
 			isKeyPressedALetter = event.keyCode;
 			if (isKeyPressedALetter > 64 && isKeyPressedALetter < 173) {
@@ -118,6 +131,8 @@
 				}
 			}
 		}
+		
+
 	}
 
 //Updates the win, loss, and guesses left display
