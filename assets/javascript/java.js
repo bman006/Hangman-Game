@@ -24,7 +24,7 @@
 	var losses = 0;
 	var guessesLeft;
 
-	var guessesAllowed = 10;//How many guesses before loss
+	var guessMultiplier = 2;//How many guesses before loss as a multiple of letters in the current word
 
 	//loop variable for checking if a word has already been used
 	var wordIndex = -1;
@@ -35,8 +35,6 @@
 		wordDisplay = []; //Clear the array
 		usedLetters = []; //Clear the array
 		var newWord = false; //condition to exit loop
-		guessesLeft = guessesAllowed;
-
 
 		//If not the first game, increment the losses counter
 		if (firstGame === false) {
@@ -49,7 +47,7 @@
 		//Select word at random from wordBank
 		//If all words have already been used then skip while loop to avoid infinite loop
 		if (wordUsed.includes("unused") === false) {
-			alert("IIIII HAAAAAVE NOOOOOOOO WOOOOOOOOORDSSSSSSSSSSSSS!!!!!!!!!!");
+			alert("NOOOOOOOO MOOOOOORRRRREEEE WOOOOOOOOORDSSSSSSSSSSSSS!!!!!!!!!!");
 		}
 		else {
 			while (newWord === false) {
@@ -58,6 +56,7 @@
 					wordActive = wordBank[wordIndex];
 					wordUsed[wordIndex] = "used";
 					newWord = true;
+					guessesLeft = wordActive.length * guessMultiplier;
 				}
 			}
 		
